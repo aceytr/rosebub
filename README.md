@@ -15,7 +15,7 @@ FEATURE REQUESTS.
 ## Contributing
 
 We welcome contributions from the community.
-Please read the [*Contributing to RoseBuB*](https://github.com/RoseBuB/CONTRIBUTING.md) section in the development repository.
+Please read the [*Contributing to RoseBuB*](https://github.com/rosebub/rosebub/blob/main/CONTRIBUTING.md) section in the development repository.
 
 ## Server Requirements
 
