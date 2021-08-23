@@ -12,14 +12,10 @@ We use Github issues, in our main repository, to track **BUGS** and to track app
 We use our [official site](http://www.rosebub.com) to provide SUPPORT and to discuss
 FEATURE REQUESTS.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
 ## Contributing
 
 We welcome contributions from the community.
 Please read the [*Contributing to RoseBuB*](https://github.com/RoseBuB/CONTRIBUTING.md) section in the development repository.
-
 
 ## Server Requirements
 
