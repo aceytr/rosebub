@@ -9,7 +9,7 @@ More information can be found at the [official site](http://www.rosebub.com).
 ## Repository Management
 
 We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.rosebub.com) to provide SUPPORT and to discuss
+We use our [official site](http://www.rosebub.com) to provide SUPPORT and to discuss
 FEATURE REQUESTS.
 
 This repository is a "distribution" one, built by our release preparation script.
