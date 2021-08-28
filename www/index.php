@@ -18,13 +18,21 @@ else{
 	ini_set('html_errors',0);
 }
 
-require_once(ROOT.'app/helpers/appHelperUrl.php');
-require_once(ROOT.'app/Model.php');
-require_once(ROOT.'app/Controller.php');
-require_once(ROOT.'app/View.php');
+$install_root = $app_config['install_root'];
+if(empty($document_root)){
+	$install_root = '..';
+}
+require_once($install_root.'/src/RoseBub/helpers/appHelperUrl.php');
+/*require_once(ROOT.'../../../app/Model.php');
+require_once(ROOT.'../../../app/Controller.php');
+require_once(ROOT.'../../../app/View.php');
 use App\Controller;
 use App\Model;
-use App\View;
+use App\View;*/
+require_once($install_root.'/vendor/autoload.php');
+use RoseBub\Controller;
+use RoseBub\Model;
+use RoseBub\View;
 
 
 session_start();

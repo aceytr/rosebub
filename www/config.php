@@ -2,6 +2,7 @@
 
 $app_config = array();
 
+$app_config['install_root'] = ''; //location src if empty, set www parent directory
 $app_config['lang_default'] = 'fr'; // en, fr, de, es, it, pt, pl
 $app_config['module_default'] = 'auth'; //home or auth module
 
