@@ -1,0 +1,10 @@
+{
+    
+	"autoload": {
+      "psr-0": {"RoseBub": "src/"}
+	},	
+	"require": {
+        "phpmailer/phpmailer": "^6.5",
+        "firebase/php-jwt": "^5.4"
+    }
+}
