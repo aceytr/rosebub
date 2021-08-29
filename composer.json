@@ -2,22 +2,26 @@
    "name":"rosebub/rosebub",
    "type":"project",
    "description":"The RoseBub framework v0.0.1",
+   "keywords":[
+      "framework",
+      "basic",
+      "portal",
+      "crm"
+   ],
    "homepage":"https://www.rosebub.com",
    "license":"MIT",
    "require":{
-      "php":"^7.3||^8.0",
+      "php":"^7.3",
       "ext-curl":"*",
       "ext-intl":"*",
       "ext-json":"*",
-      "ext-mbstring":"*"
+      "ext-mbstring":"*",
+      "phpmailer/phpmailer":"^6.5",
+      "firebase/php-jwt":"^5.4"
    },
    "autoload":{
       "psr-4":{
          "RoseBub\\":"src/"
       }
-   },
-   "require":{
-      "phpmailer/phpmailer":"^6.5",
-      "firebase/php-jwt":"^5.4"
    }
 }

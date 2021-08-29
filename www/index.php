@@ -2,10 +2,23 @@
 
 $executionTimeStart = hrtime(true); 
 
-define('WEB_ROOT',str_replace('index.php','',$_SERVER['SCRIPT_NAME']));
-define('ROOT',str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
+define('DIR_WEB',str_replace('index.php','',$_SERVER['SCRIPT_NAME']));
+define('DIR_PUBLIC',str_replace('index.php','',$_SERVER['SCRIPT_FILENAME']));
+include_once(DIR_PUBLIC.'config.php');
 
-include_once(ROOT.'config.php');
+if(empty($app_config['dir_root'])){
+	$app_config['dir_root'] = '..';
+}
+
+define('DIR_ROOT',$app_config['dir_root']);
+require_once(DIR_ROOT.'/vendor/autoload.php');
+
+define('DIR_APP',DIR_ROOT.'/src/rosebub');
+require_once(DIR_APP.'/helpers/url.php');
+
+
+
+
 if( $app_config['app_env'] == 'dev' ){
 	ini_set('display_errors',1);
 	ini_set('error_reporting', E_ALL);
@@ -18,21 +31,6 @@ else{
 	ini_set('html_errors',0);
 }
 
-$install_root = $app_config['install_root'];
-if(empty($document_root)){
-	$install_root = '..';
-}
-require_once($install_root.'/src/RoseBub/helpers/appHelperUrl.php');
-/*require_once(ROOT.'../../../app/Model.php');
-require_once(ROOT.'../../../app/Controller.php');
-require_once(ROOT.'../../../app/View.php');
-use App\Controller;
-use App\Model;
-use App\View;*/
-require_once($install_root.'/vendor/autoload.php');
-use RoseBub\Controller;
-use RoseBub\Model;
-use RoseBub\View;
 
 
 session_start();
@@ -54,8 +52,8 @@ if( isset($_REQUEST['q']) ){
 
 
 //language
-if( file_exists(ROOT.'languages/'.$lang.'.php') ){
-require_once(ROOT.'languages/'.$lang.'.php');
+if( file_exists(DIR_PUBLIC.'languages/'.$lang.'.php') ){
+	require_once(DIR_PUBLIC.'languages/'.$lang.'.php');
 }
 else{
 	die('Language '.$lang.' not found');
@@ -63,17 +61,17 @@ else{
 
 
 
-//Who is Module
+//Module
 if( empty($module) || ($app_config['module_default']=='auth' && empty($_SESSION['user_id'])) ){
 	$module = $app_config['module_default'];
 }
 
-if( file_exists(ROOT.'modules/'.$module.'/ControllerCustom.php') ){
-	include_once(ROOT.'modules/'.$module.'/ControllerCustom.php');
+if( file_exists(DIR_PUBLIC.'modules/'.$module.'/ControllerCustom.php') ){
+	include_once(DIR_PUBLIC.'modules/'.$module.'/ControllerCustom.php');
 	$moduleController = $module.'ControllerCustom';
 }
-elseif( file_exists(ROOT.'modules/'.$module.'/Controller.php') ){
-	include_once(ROOT.'modules/'.$module.'/Controller.php');
+elseif( file_exists(DIR_PUBLIC.'modules/'.$module.'/Controller.php') ){
+	include_once(DIR_PUBLIC.'modules/'.$module.'/Controller.php');
 	$moduleController = $module.'Controller';
 }
 else{
@@ -95,7 +93,7 @@ else{
 
 //Wiew
 $action = ( empty($action) ) ? 'index' : $action;
-$action = appHelperUrl_dasheToCamel($action);
+$action = helperUrl_dasheToCamel($action);
 
 if( method_exists($bean, $action) ){
 	$bean->$action();

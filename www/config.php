@@ -2,11 +2,11 @@
 
 $app_config = array();
 
-$app_config['install_root'] = ''; //location src if empty, set www parent directory
-$app_config['lang_default'] = 'fr'; // en, fr, de, es, it, pt, pl
-$app_config['module_default'] = 'auth'; //home or auth module
+$app_config['dir_root'] = ''; //root directory install example: '/home/sites/' , 'C:/laragon/www/'
+$app_config['lang_default'] = 'en'; // en, fr, de, es, it, pt, pl
+$app_config['module_default'] = 'home'; //home or auth module
 
-$app_config['url_rewriting'] = 0;//0 or 1 with rename .htaccess
+$app_config['url_rewriting'] = 0;
 
 $app_config['app_env'] = 'dev'; //dev or prod
 
