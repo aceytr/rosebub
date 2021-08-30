@@ -15,4 +15,4 @@ $mod_lang['address_city'] = 'Cidade';
 $mod_lang['address_country'] = 'País';
 $mod_lang['birthdate'] = 'Data de nascimento';
 $mod_lang['lang'] = 'Escolha seu idioma.';
-
+$mod_lang['save_ok'] = 'Seu perfil foi atualizado com sucesso !';

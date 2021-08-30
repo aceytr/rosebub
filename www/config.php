@@ -3,7 +3,7 @@
 $app_config = array();
 
 $app_config['dir_root'] = ''; //root directory install example: '/home/sites/' , 'C:/laragon/www/'
-$app_config['lang_default'] = 'en'; // en, fr, de, es, it, pt, pl
+$app_config['lang_default'] = 'en'; // en, fr, de, es, it, pt, pl, jp, kr, cn
 $app_config['module_default'] = 'home'; //home or auth module
 
 $app_config['url_rewriting'] = 0;
