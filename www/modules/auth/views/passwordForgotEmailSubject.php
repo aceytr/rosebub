@@ -1,0 +1,1 @@
+<?= $mod_lang['password_forgot_email_subject']; ?> !
