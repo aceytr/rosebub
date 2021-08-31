@@ -32,7 +32,7 @@ else{
 }
 
 
-
+session_name($app_config['session_name']);
 session_start();
 
 
