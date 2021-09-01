@@ -1,6 +1,19 @@
 <?php
 
 
+if (! function_exists('helperI18n_convertDateFromTimezone'))
+{
+
+	function helperI18n_convertDateFromTimezone($date,$timezone,$timezone_to,$format){
+		$date = new DateTime($date,new DateTimeZone($timezone));
+		$date->setTimezone( new DateTimeZone($timezone_to) );
+		return $date->format($format);
+	}
+
+}
+
+
+
 if (! function_exists('helperI18n_getPrefixPhoneForCountries'))
 {
 
