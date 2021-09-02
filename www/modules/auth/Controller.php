@@ -52,12 +52,13 @@ class AuthController extends RoseBub\Controller{
 					"sub" => "password-new",
 					"id" => $contact['id'],
 					"email" => $contact['email'],
+					"ip" => $_SERVER['REMOTE_ADDR'],
 					"iat" => $iat,
 					"exp" => $exp
 				);
 				$jwt = JWT::encode($payload, $key);
 				
-				$this->dataView['link'] = appHelperUrl_link('auth','passwordNew','','jwt='.$jwt);							
+				$this->dataView['link'] = appHelperUrl_link('auth','password_new','','jwt='.$jwt);							
 
 				$view = new AuthView();
 				$subject = $view->passwordForgotEmailSubject($this->dataView);	
@@ -96,15 +97,16 @@ class AuthController extends RoseBub\Controller{
 		}
 
 		if($jwtError === false){
-			//echo "<h1>JWT Decode</h1>";
-			//echo "<p>".print_r($jwtDecoded)."</p>";
-
-			$newPassord = $this->generatePassword($length = 12, $add_dashes = false, $available_sets = 'luds');
-						
-			$authModel = new AuthModel();		
-			$authModel->setNewPassword($jwtDecoded->id, password_hash($newPassord, PASSWORD_DEFAULT));
-			
-			$this->dataView['newPassword'] = $newPassord;
+			if( $jwtDecoded->ip == $_SERVER['REMOTE_ADDR'] ){
+				$newPassord = $this->generatePassword($length = 12, $add_dashes = false, $available_sets = 'luds');
+				$newPasswordHash = password_hash($newPassord, PASSWORD_DEFAULT);			
+				$authModel = new AuthModel();		
+				$authModel->setNewPassword($jwtDecoded->id, $newPasswordHash);			
+				$this->dataView['newPassword'] = $newPassord;
+			}
+			else{
+				$this->dataView['jwtErrorMsg'] = "Error : JWT bad IP";
+			}
 		}
 		else{
 			$this->dataView['jwtErrorMsg'] = $jwtErrorMsg;
