@@ -30,7 +30,8 @@ class MyProfilModel extends RoseBub\Model{
                                      address_city = :address_city , 
                                      address_country = :address_country , 
                                      birthdate = :birthdate , 
-                                     lang = :lang
+                                     lang = :lang ,
+									 updated_at = UTC_TIMESTAMP() 
                                      WHERE id = :id ");
 
         $sth->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
