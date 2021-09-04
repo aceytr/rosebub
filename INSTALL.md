@@ -40,3 +40,5 @@ ALTER TABLE `contacts`
   ADD KEY `email` (`email`);
 COMMIT;
 
+## Change your passord
+index.php?q=fr/auth/password-forgot
