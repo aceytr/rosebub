@@ -30,7 +30,9 @@ CREATE TABLE `contacts` (
 
 
 ## Add first user
-'!! change email value !!'
+
+`!! change email value !!`
+
 INSERT INTO `contacts` (`id`, `id_ext`, `created_at`, `updated_at`, `deleted_at`, `first_name`, `last_name`, `email`, `password`, `phone_mobile`, `address_street`, `address_postalcode`, `address_city`, `address_country`, `birthdate`, `lang`, `dateformat`, `timezone`, `calendars`, `roles`, `groups`, `api_key`, `api_limit`) VALUES
 ('1', '', '2021-07-20 14:43:07', '2021-07-20 14:43:07', NULL, 'Dupont', 'Eric', 'eric.dupont@gmail.com', '$2y$10$5tCZOQmmRIQr2dYE6rfPk.KwN/YP9PSQcSchIxwG3IxSlvdMApwXu', '+33630432923', '1 rue de la paix', '75000', 'Paris', 'FRANCE', '1970-01-01', 'fr', 'd/m/y', 'Europe/Paris', NULL, '[\"admin\", \"superadmin\"]', NULL, '', '');
 
