@@ -1,7 +1,8 @@
 {
    "name":"rosebub/rosebub",
    "type":"project",
-   "description":"The RoseBub framework v0.0.1",
+   "description":"The RoseBub framework",
+   "minimum-stability": "dev",
    "keywords":[
       "framework",
       "basic",
