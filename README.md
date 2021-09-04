@@ -1,7 +1,7 @@
 # RoseBuB
 
 ## What is RoseBuB?
-RoseBuB is a PHP MVC full-stack web framework that is ultra light and very simple.
+RoseBuB is a PHP MVC Framework light and simple.
 More information can be found at the [official site](http://www.rosebub.com).
 
 **Please** read the user guide for a better explanation of how RoseBub works!
