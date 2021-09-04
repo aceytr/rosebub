@@ -1,6 +1,6 @@
 <?php
 
-namespace RoseBub;
+namespace App;
 
 abstract class Controller{
 

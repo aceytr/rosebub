@@ -1,6 +1,6 @@
 <?php
 
-namespace RoseBub;
+namespace App;
 use \PDO;
 use \PDOException;
 

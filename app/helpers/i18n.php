@@ -1195,7 +1195,8 @@ if (! function_exists('helperI18n_getTimezones'))
 if (! function_exists('helperI18n_getTimezonesByContinent'))
 {
 
-	function helperI18n_getTimezonesByContinent(){
+	function helperI18n_getTimezonesByContinent()
+	{
 		// for HTML select element
 		$timezones = array (
 			'America' => array (
@@ -1629,4 +1630,4 @@ if (! function_exists('helperI18n_getTimezonesByContinent'))
 		return($timezones);	
 	}
 }
-
+}
