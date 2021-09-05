@@ -1,6 +1,7 @@
 <?php
 	require_once(DIR_APP.'/helpers/i18n.php');
     $emoji_flags = helperI18n_getEmojisForCountries();
+    $timezones = helperI18n_getTimezones();
 ?>
 
 <div style="text-align:center;">
@@ -30,7 +31,8 @@ if(@$_REQUEST['save'] == 1){
     echo '<p><b>'.$mod_lang['address_country'].':</b> '.strtoupper($dataView['address_country']).'</p>';
     echo '<p><b>'.$mod_lang['birthdate'].':</b> '.$dataView['birthdate'].'</p>';
     echo '<p><b>'.$mod_lang['lang'].':</b> '.$emoji_flags[strtoupper($dataView['lang'])].' '.strtoupper($dataView['lang']).'</p>';
-
+    echo '<p><b>'.$mod_lang['dateformat'].':</b> '.$dataView['dateformat'].'</p>';
+    echo '<p><b>'.$mod_lang['timezone'].':</b> '.$timezones[$dataView['timezone']].'</p>';
     ?>
 </div>
 

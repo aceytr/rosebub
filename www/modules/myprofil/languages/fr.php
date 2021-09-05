@@ -16,4 +16,6 @@ $mod_lang['address_country'] = 'Pays';
 $mod_lang['birthdate'] = 'Date de naissance';
 $mod_lang['lang'] = 'Choisissez votre langue';
 $mod_lang['save_ok'] = 'Votre profil a été mis a jour avec succes !';
+$mod_lang['dateformat'] = 'Format des dates';
+$mod_lang['timezone'] = 'Fuseau horaire';
 

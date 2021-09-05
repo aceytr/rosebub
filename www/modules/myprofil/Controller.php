@@ -1,9 +1,11 @@
 <?php
 
+use App\Controller;
+
 include_once('View.php');
 include_once('Model.php');
 
-class MyProfilController extends RoseBub\Controller{
+class MyProfilController extends Controller{
 
 	private $data;
 	
@@ -65,8 +67,14 @@ class MyProfilController extends RoseBub\Controller{
 			$dataModel['address_city'] = strip_tags($_POST['address_city']);
 			$dataModel['address_country'] = strip_tags($_POST['address_country']);
 			$dataModel['birthdate'] = strip_tags($_POST['birthdate']);
-			$dataModel['lang'] = strip_tags($_POST['lang']);		
-			
+			$dataModel['lang'] = strip_tags($_POST['lang']);
+			if($dataModel['lang']=='gb' || $dataModel['lang']=='gb'){
+				$dataModel['lang']=='en';
+			}
+			$dataModel['dateformat'] = strip_tags($_POST['dateformat']);
+			$dataModel['timezone'] = strip_tags($_POST['timezone']);
+			$dataModel['calendars'] = strip_tags($_POST['calendars']);
+
 			$profilModel->setContactConnected($dataModel);
 
 
@@ -80,6 +88,9 @@ class MyProfilController extends RoseBub\Controller{
 			$_SESSION['user_address_country'] = $dataModel['address_country'];
 			$_SESSION['user_birthdate'] = $dataModel['birthdate'];
 			$_SESSION['user_lang'] = $dataModel['lang'];
+			$_SESSION['dateformat'] = $dataModel['dateformat'];
+			$_SESSION['timezone'] = $dataModel['timezone'];
+			$_SESSION['calendars'] = $dataModel['calendars'];
 
 		}
 

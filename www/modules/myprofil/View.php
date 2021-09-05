@@ -1,8 +1,10 @@
 <?php
 
+use App\View;
+
 include_once(__DIR__.'/languages/'.$lang.'.php');
 
-class MyProfilView extends RoseBub\View
+class MyProfilView extends View
 {
 
     function __construct()
@@ -34,7 +36,7 @@ class MyProfilView extends RoseBub\View
 		parent::setView(DIR_PUBLIC.'layouts/menu.php');		
         parent::setView(__DIR__.'/views/update.php');
         parent::setView(DIR_PUBLIC.'layouts/footer.php');
-        echo parent::render($dataView);
+       echo parent::render($dataView);
     }
 
 

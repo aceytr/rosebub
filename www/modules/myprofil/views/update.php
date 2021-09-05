@@ -3,6 +3,7 @@
     require_once(DIR_APP.'/helpers/i18n.php');
     $countries = helperI18n_getCountries();
     $emoji_flags = helperI18n_getEmojisForCountries();
+    $timezones = helperI18n_getTimezones();
 
     echo '<form method="post" id="myprofil-update" action="'.helperUrl_link('myprofil','update-save').'">';
 ?>
@@ -38,7 +39,7 @@
     echo '<p><b>'.$mod_lang['lang'].':</b> <select name="lang">';
 
 
-        $langArr = array('us','gb','fr','es','de','it','pt','pl');
+        $langArr = array('us','gb','fr','es','de','it','pt','pl','cn','jp','kr');
 
         foreach($langArr as $langSelect){
             echo '<option value="'.$langSelect.'" ';
@@ -51,8 +52,38 @@
     
     echo '</select></p>';
 
+    echo '<p><b>'.$mod_lang['dateformat'].':</b> <select name="dateformat">';
+        echo '<option value="Y-m-d"';
+        if( $dataView['dateformat'] == "Y-m-d" ){
+            echo 'selected';
+        }
+        echo '>YYYY-MM-DD</option>';
+        echo '<option value="d/m/Y"';
+        if( $dataView['dateformat'] == "d/m/Y" ){
+            echo 'selected';
+        }
+        echo '>DD/MM/YYYY</option>';
+    echo '</select></p>';
+
+
+    echo '<p><b>'.$mod_lang['timezone'].':</b> <select name="timezone">';
+
+	echo '<option></option>';
+    foreach($timezones as $key=>$val){
+        //$timezone = strtoupper($val);
+        echo '<option value="'.$key.'" ';
+        if($key==$dataView['timezone']){
+            echo 'selected';
+        }
+        echo '>'.$val.'</span></option>';
+    }  
+    echo '</select></p>'; 
+
+
+    echo '<input type="hidden" name="calendars" value="">';
+
     ?>
-<span class="flag-icon flag-icon-gr"></span>
+
     
 
 

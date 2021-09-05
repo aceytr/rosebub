@@ -1,6 +1,8 @@
 <?php
 
-class MyProfilModel extends RoseBub\Model{
+use App\Model;
+
+class MyProfilModel extends Model{
 
     public function __construct()
     {
@@ -12,7 +14,7 @@ class MyProfilModel extends RoseBub\Model{
     {
         $sth = $this->db->prepare("SELECT first_name, last_name, email, phone_mobile, 
                                             address_street, address_postalcode, address_city, address_country,  
-                                            birthdate, lang FROM contacts WHERE id = :id AND deleted = 0 LIMIT 1");
+                                            birthdate, lang, dateformat, timezone, calendars FROM contacts WHERE id = :id AND deleted_at IS  NULL LIMIT 1");
         $sth->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
         $sth->execute();
         return $sth->fetch(); 
@@ -30,8 +32,10 @@ class MyProfilModel extends RoseBub\Model{
                                      address_city = :address_city , 
                                      address_country = :address_country , 
                                      birthdate = :birthdate , 
-                                     lang = :lang ,
-									 updated_at = UTC_TIMESTAMP() 
+                                     lang = :lang , 
+                                     dateformat = :dateformat , 
+                                     timezone = :timezone , 
+                                     calendars = :calendars  
                                      WHERE id = :id ");
 
         $sth->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
@@ -45,6 +49,9 @@ class MyProfilModel extends RoseBub\Model{
         $sth->bindParam(':address_country', $data['address_country'], PDO::PARAM_STR);
         $sth->bindParam(':birthdate', $data['birthdate'], PDO::PARAM_STR);
         $sth->bindParam(':lang', $data['lang'], PDO::PARAM_STR);
+        $sth->bindParam(':dateformat', $data['dateformat'], PDO::PARAM_STR);
+        $sth->bindParam(':timezone', $data['timezone'], PDO::PARAM_STR);
+        $sth->bindParam(':calendars', $data['calendars']);
 
         $sth->execute();
         return $sth->fetch(); 
