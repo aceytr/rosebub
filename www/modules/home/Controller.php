@@ -1,9 +1,11 @@
 <?php
 
+use App\Controller;
+
 include_once('View.php');
 include_once('Model.php');
 
-class HomeController extends App\Controller{
+class HomeController extends Controller{
 
 	private $data;
 	
@@ -14,7 +16,7 @@ class HomeController extends App\Controller{
 		
 		global $app_config;
 		if(empty($_SESSION['user_id']) && $app_config['module_default']=='auth'){//must be connected
-			appHelperUrl_redirect('auth','index'); 
+			helperUrl_redirect('auth','index'); 
 		}
 	}
 

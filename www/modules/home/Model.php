@@ -1,6 +1,8 @@
 <?php
 
-class HomeModel extends App\Model{
+use App\Model;
+
+class HomeModel extends Model{
 
     function __construct()
     {

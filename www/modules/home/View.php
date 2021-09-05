@@ -1,8 +1,10 @@
 <?php
 
+use App\View;
+
 include_once(__DIR__.'/languages/'.$lang.'.php');
 
-class HomeView extends App\View
+class HomeView extends View
 {
 
     function __construct()
@@ -16,10 +18,10 @@ class HomeView extends App\View
 
         $dataView['head_title'] = $mod_lang['title'];
 
-        parent::setView(ROOT.'layouts/head.php'); 
-		parent::setView(ROOT.'layouts/menu.php');          
+        parent::setView(DIR_PUBLIC.'layouts/head.php'); 
+		parent::setView(DIR_PUBLIC.'layouts/menu.php');          
         parent::setView(__DIR__.'/views/default.php');
-        parent::setView(ROOT.'layouts/footer.php');
+        parent::setView(DIR_PUBLIC.'layouts/footer.php');
         echo parent::render($dataView);
     }
 
