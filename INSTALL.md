@@ -1,6 +1,9 @@
 # INSTALLATION 
 composer create-project rosebub/rosebub --stability=dev
 
+## Configure file
+www/config.php
+
 ## Create database 
 CREATE TABLE `contacts` (
   `id` char(36) NOT NULL,
