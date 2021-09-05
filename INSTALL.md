@@ -1,4 +1,4 @@
-# INSTALLATION
+# INSTALLATION 
 composer create-project rosebub/rosebub --stability=dev
 
 ## Create database 
@@ -31,6 +31,7 @@ CREATE TABLE `contacts` (
 
 ## Add first user
 
+**Please** Change data in insert query: add your email, your name etc..
 ⚠️Change email value !!
 
 INSERT INTO `contacts` (`id`, `id_ext`, `created_at`, `updated_at`, `deleted_at`, `first_name`, `last_name`, `email`, `password`, `phone_mobile`, `address_street`, `address_postalcode`, `address_city`, `address_country`, `birthdate`, `lang`, `dateformat`, `timezone`, `calendars`, `roles`, `groups`, `api_key`, `api_limit`) VALUES
