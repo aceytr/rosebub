@@ -1,8 +1,10 @@
 <?php
 
+use App\View;
+
 include_once(__DIR__.'/languages/'.$lang.'.php');
 
-class AuthView extends RoseBub\View
+class AuthView extends App\View
 {
 	
 	function __construct()

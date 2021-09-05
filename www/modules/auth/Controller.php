@@ -4,9 +4,10 @@ include_once('View.php');
 include_once('Model.php');
 
 require_once(__DIR__ . '/libraries/vendor/autoload.php');
+use App\Controller;
 use Firebase\JWT\JWT;
 
-class AuthController extends RoseBub\Controller{	
+class AuthController extends Controller{	
 	
 	private $dataView;
 	private $jwtSecretKey = 'Ap*47_tq89*er22';
@@ -45,8 +46,7 @@ class AuthController extends RoseBub\Controller{
 			if($contact['id']!=false){//send email
 				//JWT
 				$iat = time();
-				//$exp = $iat + (2 * 60 * 60);//+2 hour
-				$exp = $iat + ( 60);//+1 minute
+				$exp = $iat + (2 * 60 * 60);//+2 hour
 				$key = $this->jwtSecretKey;
 				$payload = array(
 					"sub" => "password-new",
@@ -58,15 +58,15 @@ class AuthController extends RoseBub\Controller{
 				);
 				$jwt = JWT::encode($payload, $key);
 				
-				$this->dataView['link'] = appHelperUrl_link('auth','password_new','','jwt='.$jwt);							
+				$this->dataView['link'] = helperUrl_link('auth','password-new','','jwt='.$jwt);							
 
 				$view = new AuthView();
 				$subject = $view->passwordForgotEmailSubject($this->dataView);	
 				$body = $view->passwordForgotEmailHtml($this->dataView);				
 				$altBody = $view->passwordForgotEmailTxt($this->dataView);
 
-				require_once(DIR_APP.'/helpers/appHelperEmail.php');	
-				$resultMail = helperEmail_send($userMail=$_POST['email'],$userName='',$subject,$body,$altBody);
+				require_once(DIR_APP.'/helpers/mail.php');	
+				$resultMail = helperMail_send($userMail=$_POST['email'],$userName='',$subject,$body,$altBody);
 				$this->dataView['resultMail'] = $resultMail;
 				if($resultMail!=true){
 					$this->dataView['resultMail'] = $resultMail;

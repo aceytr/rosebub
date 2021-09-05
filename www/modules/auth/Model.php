@@ -1,6 +1,8 @@
 <?php
 
-class AuthModel extends RoseBub\Model
+use App\Model;
+ 
+class AuthModel extends Model
 {
 
 	public function __construct()
@@ -12,7 +14,7 @@ class AuthModel extends RoseBub\Model
 
     public function getContactByEmail(string $email)
 	{		
-        $sth = $this->db->prepare("SELECT * FROM contacts WHERE email LIKE :email AND deleted = 0 LIMIT 1");
+        $sth = $this->db->prepare("SELECT * FROM contacts WHERE email LIKE :email AND deleted_at IS NULL LIMIT 1");
         $sth->bindParam(':email', $email, PDO::PARAM_STR);
         $sth->execute();
         return $sth->fetch(); 
