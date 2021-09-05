@@ -22,13 +22,13 @@ CREATE TABLE `contacts` (
   `address_country` varchar(20) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
-  `dateformat` varchar(5) DEFAULT 'd/m/Y',
+  `dateformat` varchar(5) DEFAULT 'Y-m-d',
   `timezone` varchar(255) DEFAULT 'Europe/Paris',
-  `calendars` json DEFAULT NULL,
-  `roles` json DEFAULT NULL,
-  `groups` json DEFAULT NULL,
+  `calendars` longtext,
+  `roles` longtext,
+  `groups` longtext,
   `api_key` char(36) DEFAULT NULL,
-  `api_limit` json DEFAULT NULL
+  `api_limit` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
