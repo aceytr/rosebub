@@ -15,11 +15,13 @@ CREATE TABLE `contacts` (
   `last_name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `phone_mobile` varchar(100) DEFAULT NULL,
   `address_street` varchar(150) DEFAULT NULL,
   `address_postalcode` varchar(150) DEFAULT NULL,
   `address_city` varchar(150) DEFAULT NULL,
   `address_country` varchar(20) DEFAULT NULL,
+  `country_code` varchar(5) DEFAULT NULL,
+  `dialing_code` varchar(10) DEFAULT NULL,
+  `phone_mobile` varchar(20) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
   `dateformat` varchar(5) DEFAULT 'Y-m-d',
@@ -37,8 +39,8 @@ CREATE TABLE `contacts` (
 **Please** Change data in insert query: add your email, your name etc..
 ⚠️Change email value !!
 
-INSERT INTO `contacts` (`id`, `id_ext`, `created_at`, `updated_at`, `deleted_at`, `first_name`, `last_name`, `email`, `password`, `phone_mobile`, `address_street`, `address_postalcode`, `address_city`, `address_country`, `birthdate`, `lang`, `dateformat`, `timezone`, `calendars`, `roles`, `groups`, `api_key`, `api_limit`) VALUES
-('1', '', '2021-07-20 14:43:07', '2021-07-20 14:43:07', NULL, 'Dupont', 'Eric', 'eric.dupont@gmail.com', '', '+33630432923', '1 rue de la paix', '75000', 'Paris', 'FRANCE', '1970-01-01', 'fr', 'd/m/y', 'Europe/Paris', NULL, '[\"admin\", \"superadmin\"]', NULL, '', '');
+INSERT INTO `contacts` (`id`, `id_ext`, `created_at`, `updated_at`, `deleted_at`, `first_name`, `last_name`, `email`, `password`, `address_street`, `address_postalcode`, `address_city`, `address_country`, `country_code`, `dialing_code`, `phone_mobile`, `birthdate`, `lang`, `dateformat`, `timezone`, `calendars`, `roles`, `groups`, `api_key`, `api_limit`) VALUES
+('1', '', '2021-09-05 14:49:34', '2021-09-06 15:37:56', NULL, 'Dupont', 'Eric', 'eric.dupont@gmail.com', '$2y$10$5tCZOQmmRIQr2dYE6rfPk.KwN/YP9PSQcSchIxwG3IxSlvdMApwXu', '1 rue du stade', '75000', 'Paris', 'FRANCE', 'FR', '+33', '630432923', '1971-06-22', 'fr', 'd/m/Y', 'Europe/Paris', '', '[\"admin\", \"superadmin\"]', NULL, '', '');
 
 ## Add index
 ALTER TABLE `contacts`
