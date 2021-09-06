@@ -4,6 +4,7 @@
     $timezones = helperI18n_getTimezones();
 ?>
 
+
 <div style="text-align:center;">
     <h1><?= $mod_lang['title']; ?></h1>
 </div>
@@ -20,7 +21,6 @@ if(@$_REQUEST['save'] == 1){
 
 <div style="text-align:center;">    
     <?php   
-    
     echo '<p><b>'.$mod_lang['first_name'].':</b> '.$dataView['first_name'].'</p>';
     echo '<p><b>'.$mod_lang['last_name'].':</b> '.$dataView['last_name'].'</p>';
     echo '<p><b>'.$mod_lang['email'].':</b> '.$dataView['email'].'</p>';
