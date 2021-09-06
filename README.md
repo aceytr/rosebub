@@ -19,13 +19,7 @@ Please read the [*Contributing to RoseBuB*](https://github.com/rosebub/rosebub/b
 
 ## Server Requirements
 
-PHP version 7.3 or higher is required. PDO PHP extension.
-Database must have JSON data type: 
-- MySQL (5.7.8 or higher)
-- MariaDB (5.7.8 or higher)
-- PostgreSQL (9.2 or higher)
-- Microsoft SQL Server (2016 or higher)
-- SQLite (3.33 or higher)
-- Oracle (11.1 or higher)
+PHP version 7.3 or higher is required. PDO PHP extension for database
+MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, SQLite, Oracle.
 
 
