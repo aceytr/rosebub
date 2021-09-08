@@ -45,8 +45,8 @@ abstract class View {
 		 * @return string $output html
 		 */
 		public function render(array $dataView){
-			global $lang, $app_lang, $mod_lang;
-			
+			global $module, $action, $id, $lang, $app_lang, $mod_lang;
+
 			ob_start();
 			foreach($this->getViews() as $viewPath){
 				include_once($viewPath);

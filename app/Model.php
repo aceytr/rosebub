@@ -14,9 +14,7 @@ abstract class Model{
 
     protected $db = null;
 
-    public $table;
-    public $id;
-
+ 
 
     public function __construct(){ 
         global $app_config; 
@@ -30,7 +28,7 @@ abstract class Model{
     
 
     /**
-     * Database connexion
+     * Database connexion set
      *
      * @return object
      */
@@ -53,6 +51,11 @@ abstract class Model{
     }
 
 
+    /**
+     * Database connexion get
+     *
+     * @return db object
+     */
     public function getConnection(){
         if($this->db == null){
             $this->setConnection();
@@ -65,32 +68,78 @@ abstract class Model{
 
 
 
-    /**
-     * Get one record filter by id
-     *
-     * @return void
-     */
-    public function getOne()
-    {
-        $sth = $this->db->prepare('SELECT * FROM :table WHERE id = :id LIMIT 1');
-        $sth->bindParam(':table', $this->table, PDO::PARAM_STR);
-        $sth->bindParam(':id', $this->id, PDO::PARAM_INT);
-        $sth->execute();
-        return $sth->fetch();      
-    }
+
+
 
     /**
-     * Get all record 
+     * Execute select query by id 
      *
-     * @return void
+     * @param mixed $table table name
+     * @param mixed $id record id
+     * @return mixed statement fetch
      */
-    public function getAll()
-    {
-        $sth = $this->db->prepare('SELECT * FROM :table ');
-        $sth->bindParam(':table', $this->table, PDO::PARAM_STR);
-        $sth->execute();
-        return $sth->fetchAll();     
+    public function selectById($table, $id)
+    {        
+        $query = 'SELECT * FROM :table WHERE id = :id AND deleted_at IS NULL LIMIT 1';
+
+        $statement = $this->db->prepare($query);
+
+        $statement->bindParam(':table', $table, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        $statement->execute();
+        return $statement->fetch();      
     }
+
+
+
+
+    /**
+     * Delete record by id
+     *
+     * @param mixed $table table name
+     * @param mixed $id record id
+     * @param mixed $mode soft or hard
+     * @return fetchAll
+     */
+    public function delete($table, $id, $mode="soft")
+    {        
+        if( $mode=="soft" ){
+            $query = 'UPDATE '.$table.' SET deleted_at = UTC_TIMESTAMP()  WHERE id="'.$id.'"'; 
+        }
+
+        if( $mode=="hard" ){
+            $query = 'DELETE FROM '.$table.' WHERE id="'.$id.'"'; 
+        }
+
+        $statement = $this->db->prepare($query);
+
+        if ($statement->execute()) {
+            return $statement->rowCount();
+        }
+        else{
+            return false;
+        }      
+    }
+
+
+
+
+    /**
+     * Execute query 
+     *
+     * @param string $query sqlquery
+     * @return mixed statement fetchAll
+     */
+    public function query($query)
+    {
+        $statement = $this->db->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll();      
+    }
+
+
+
 
     /**
      * Database close connexion
