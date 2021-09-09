@@ -91,6 +91,7 @@ abstract class Model{
      */
     public function select($table, $where, $orderby='', $limit='', $offset='')
     {        
+
         $query = 'SELECT * FROM '.$table.' WHERE ';
         foreach($where as $key=>$val){
             $query .= $key.' = :'.$key.' AND ';
@@ -107,8 +108,13 @@ abstract class Model{
                 $query .= ', '.$offset;
             }
         }
-
+        
+       
         $statement = $this->db->prepare($query);
+        foreach($where as $key=>$val){
+            $statement->bindValue(':'.$key, $val);
+        } 
+        
         
         try {
             $statement->execute();
@@ -241,7 +247,7 @@ abstract class Model{
      * query
      *
      * @param mixed $query
-     * @return int statement fetch all
+     * @return int statement object
      */
     public function query($query)
     {        
@@ -253,7 +259,7 @@ abstract class Model{
             echo $e->getMessage();
         }
 
-        return $statement->fetchAll();          
+        return $statement;          
     }
 
 
