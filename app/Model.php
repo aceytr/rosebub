@@ -67,28 +67,139 @@ abstract class Model{
 
 
 
+    /**
+     * Database close connexion
+     *
+     * @return void
+     */
+    public function close()
+    {
+        $this->db = null;
+    }
+
+
+
+    /**
+     * Execute select query 
+     *
+     * @param string $table table name
+     * @param array $where fields array(name=>value)
+     * @param string $orderby
+     * @param int $limit
+     * @param int $offset
+     * @return mixed statement fetch
+     */
+    public function select($table, $where, $orderby='', $limit='', $offset='')
+    {        
+        $query = 'SELECT * FROM '.$table.' WHERE ';
+        foreach($where as $key=>$val){
+            $query .= $key.' = :'.$key.' AND ';
+        }
+        $query = substr($query,0,-4).' AND deleted_at IS NULL';
+
+        if( !empty($orderby) ){
+            $query .= ' ORDER BY '.$orderby;
+        }
+
+        if( !empty($limit) ){
+            $query .= ' LIMIT '.$limit;
+            if( !empty($offset) ){
+                $query .= ', '.$offset;
+            }
+        }
+
+        $statement = $this->db->prepare($query);
+        
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $statement->fetchAll();      
+    }
+
+
+
+    /**
+     * Execute insert query 
+     *
+     * @param string $table table name
+     * @param array $fields array(name => value)
+     * @return int statement affected row
+     */
+    public function insert(string $table, array $fields)
+    {        
+        
+        $query = 'INSERT INTO '.$table.' (created_at, modified_at, ';
+
+        foreach($fields as $key=>$val){
+            $query .= $key.', ';
+        }
+        $query = substr($query,0,-2);
+
+        $query .= ') VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), ';
+
+        foreach($fields as $key=>$val){
+            $query .= ':'.$key.', ';
+        }
+        $query = substr($query,0,-2);
+
+        $statement = $this->db->prepare($query);
+       
+
+        foreach($fields as $key=>$val){
+            $statement->bindValue(':'.$key, $val);
+        }  
+        
+
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $statement->lastInsertId();  
+    }
 
 
 
 
     /**
-     * Execute select query by id 
+     * Execute update query by id 
      *
-     * @param mixed $table table name
-     * @param mixed $id record id
-     * @return mixed statement fetch
+     * @param string $table table name
+     * @param int $id record id
+     * @param array $fields array(name => value)
+     * @return int statement affected row
      */
-    public function selectById($table, $id)
+    public function update(string $table, int $id, array $fields)
     {        
-        $query = 'SELECT * FROM :table WHERE id = :id AND deleted_at IS NULL LIMIT 1';
+        
+        $query = 'UPDATE '.$table.' SET updated_at = UTC_TIMESTAMP(), ';
+
+        foreach($fields as $key=>$val){
+            $query .= $key.' = :'.$key.', ';
+        }
+        $query = substr($query,0,-2);
+
+        $query .= ' WHERE id = '.$id;
 
         $statement = $this->db->prepare($query);
+       
 
-        $statement->bindParam(':table', $table, PDO::PARAM_STR);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        foreach($fields as $key=>$val){
+            $statement->bindValue(':'.$key, $val);
+        }  
         
-        $statement->execute();
-        return $statement->fetch();      
+
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $statement->rowCount();   
     }
 
 
@@ -100,55 +211,53 @@ abstract class Model{
      * @param mixed $table table name
      * @param mixed $id record id
      * @param mixed $mode soft or hard
-     * @return fetchAll
+     * @return int statement affected row
      */
     public function delete($table, $id, $mode="soft")
     {        
-        if( $mode=="soft" ){
+        if( $mode == "soft" ){
             $query = 'UPDATE '.$table.' SET deleted_at = UTC_TIMESTAMP()  WHERE id="'.$id.'"'; 
         }
 
-        if( $mode=="hard" ){
+        if( $mode == "hard" ){
             $query = 'DELETE FROM '.$table.' WHERE id="'.$id.'"'; 
         }
 
         $statement = $this->db->prepare($query);
 
-        if ($statement->execute()) {
-            return $statement->rowCount();
+
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
-        else{
-            return false;
-        }      
+
+        return $statement->rowCount();          
     }
 
 
 
-
     /**
-     * Execute query 
+     * query
      *
-     * @param string $query sqlquery
-     * @return mixed statement fetchAll
+     * @param mixed $query
+     * @return int statement fetch all
      */
     public function query($query)
-    {
+    {        
         $statement = $this->db->prepare($query);
-        $statement->execute();
-        return $statement->fetchAll();      
+
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        return $statement->fetchAll();          
     }
 
 
 
 
-    /**
-     * Database close connexion
-     *
-     * @return void
-     */
-    public function close()
-    {
-        $this->db = null;
-    }
 
 }
