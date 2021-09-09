@@ -1,0 +1,64 @@
+body {
+		margin: 0; 
+		padding: 0; 
+		font-size: 100%; 
+		line-height: 1.5;
+		font-family: font-family: Arial, Helvetica, sans-serif;;
+	}
+	
+
+/* https://flatuicolors.com/palette/ru */
+
+
+/* button */
+.button {
+  background-color: #f8a5c2; /* rogue pink */
+  border: none;
+  color: black;
+  font-weight: bold; 
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+.button {
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: #f78fb3; /* flamingo pink */
+  color: black;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* div alert error ok */
+.alert {
+	text-align: center; 
+	background-color: #c44569; 
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+}
+
+.error {
+	text-align: center; 
+	background-color: #f5cd79; 
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+}
+
+.ok {
+	text-align:center; 
+	background-color: #3dc1d3; 
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+}
